@@ -1,0 +1,11 @@
+package com.jbde.constants;
+
+public enum ActorRoles {
+	TRAINEE_ACTOR,
+	ASSOCIATE_ACTOR,
+	SENIOR_ACTOR,
+	LEAD_ACTOR,
+	SENIOR_LEAD_ACTOR,
+	EXECUTIVE_ACTOR,
+	SENIOR_EXECUTIVE_ACTOR
+}
