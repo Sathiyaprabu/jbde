@@ -24,9 +24,12 @@ public class JbdeJwtToken {
 	
 	public static long milliSecTime = System.currentTimeMillis();
 	public static long expiryDuration = 60 * 60;
-
+	public static long rtexpiryDuration = expiryDuration * 2;
+	
 	Date issuedAt = new Date(milliSecTime);
 	Date expireAt = new Date(milliSecTime + expiryDuration * 1000);
+	Date rtissuedAt = new Date((milliSecTime + expiryDuration * 1000) - (120*1000));
+	Date rtexpireAt = new Date(milliSecTime + rtexpiryDuration * 1000);
 
 	public String generateJbeToken(Employee employee) {
 		
@@ -38,7 +41,8 @@ public class JbdeJwtToken {
 		              
 		                claims.add("name",employee.getEmpName());
 		                
-		        		String token = Jwts.builder()
+		        		@SuppressWarnings("unchecked")
+						String token = Jwts.builder()
 		                		.claims((Map<String, ?>) claims)
 		                        .signWith(getJbdeSigningKey())
 		                        .compact();
@@ -55,15 +59,29 @@ public class JbdeJwtToken {
 	
 	public String generateJbdeRefreshToken(Employee employee) {
 		
-		String refreshtoken = Jwts.builder()
-        		.subject(employee.getID().toString())
+		/*
+		 * String refreshtoken = Jwts.builder() .subject(employee.getID().toString())
+		 * .issuer(employee.getEmpID()) .issuedAt(issuedAt) .expiration(expireAt)
+		 * .signWith(getJbdeSigningKey()) .compact();
+		 * 
+		 * return refreshtoken;
+		 */
+		
+		ClaimsBuilder claims = Jwts.claims()
+				.subject(employee.getID().toString())
         		.issuer(employee.getEmpID())
-                .issuedAt(issuedAt)
-                .expiration(expireAt)
-                .signWith(getJbdeSigningKey())
-                .compact();
-               		
-        		return refreshtoken;
+                .issuedAt(rtissuedAt)
+                .expiration(rtexpireAt);
+              
+                claims.add("name",employee.getEmpName());
+                
+        		@SuppressWarnings("unchecked")
+				String token = Jwts.builder()
+                		.claims((Map<String, ?>) claims)
+                        .signWith(getJbdeSigningKey())
+                        .compact();
+        		
+		return token;
 	}
 	
 	//verifying the Claims

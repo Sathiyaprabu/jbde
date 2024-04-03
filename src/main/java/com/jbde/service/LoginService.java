@@ -67,6 +67,8 @@ public class LoginService {
 				String token = jbdeJwtToken.generateJbeToken(empReturn.get());
 				Map<String, Object> data = new HashMap<>();
 				data.put("accessToken", token);
+				token = jbdeJwtToken.generateJbdeRefreshToken(empReturn.get());
+				data.put("refreshToken", token);
 				apiResponse.setData(data);
 				
 			} else {
