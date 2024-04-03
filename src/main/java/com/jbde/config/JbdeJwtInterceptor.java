@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
 
+import com.jbde.dto.LoginRequestDTO;
 import com.jbde.security.JbdeJwtToken;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +16,9 @@ public class JbdeJwtInterceptor extends WebRequestHandlerInterceptorAdapter{
 
 	@Autowired
 	JbdeJwtToken jbdeJwtToken;
+	
+	@Autowired
+	LoginRequestDTO loginRequestDTO;
 	
 	public JbdeJwtInterceptor(WebRequestInterceptor requestInterceptor) {
 		super(requestInterceptor);
@@ -31,6 +35,7 @@ public class JbdeJwtInterceptor extends WebRequestHandlerInterceptorAdapter{
 		
 	if(!(request.getRequestURI().contains("login") || request.getRequestURI().contains("signup"))) {
 		jbdeJwtToken.verifyJbdeJwtToken(auth);
+		
 		System.out.println("JbdeJwtInterceptor :: preHandle() : NOT LOGIN/SIGNUP Check - after verifyJbdeJwtToken() called ");
 	}
 	

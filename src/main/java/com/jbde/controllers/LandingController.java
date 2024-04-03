@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jbde.dto.JbdeRequestMeta;
 import com.jbde.entity.Employee;
+import com.jbde.entity.JbdeToken;
 import com.jbde.repository.EmployeeListRepository;
+import com.jbde.repository.JbdeTokenRepository;
 import com.jbde.security.JbdeJwtToken;
 
 @Controller
@@ -27,10 +29,19 @@ public class LandingController {
 	@Autowired
 	private JbdeJwtToken jbdeJwtToken;
 	
+	@Autowired
+	JbdeToken jbdeToken;
+	
+	@Autowired
+	private JbdeTokenRepository jbdeTokenRepository;
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/landing/{employee}")
-	public String loadIndexPage(@PathVariable("employee") String empName, Model model) {
+	public String loadIndexPage(@PathVariable("employee") String empName, Model model) throws Exception {
 		System.out.println("LandingController :: loadIndexPage() :: Emp ID: " + jbdeRequestMeta.getEmpID());
-
+		String email = "test_22@test.com";
+		jbdeToken = (JbdeToken) jbdeTokenRepository.findByJbdeToken(null);
+		String auth = jbdeToken.getJbdeToken();
+		jbdeJwtToken.validateJbdeToken(auth, email);
 		List<Employee> employeeList = empllistrepo.findByEmpName(empName);
 		model.addAttribute("employees", employeeList);
 

@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.jbde.dto.LoginRequestDTO;
 import com.jbde.dto.SignUpRequestDTO;
 import com.jbde.entity.Employee;
+import com.jbde.entity.JbdeToken;
 import com.jbde.repository.EmployeeListRepository;
+import com.jbde.repository.JbdeTokenRepository;
 import com.jbde.security.JbdeJwtToken;
 import com.jbde.util.APIResponse;
 
@@ -28,6 +30,12 @@ public class LoginService {
 	
 	@Autowired
 	Employee empEntity;
+	
+	@Autowired
+	JbdeTokenRepository jbdeTokenRepository;
+	
+	@Autowired
+	JbdeToken jbdeToken;
 
 	public APIResponse signUpService(SignUpRequestDTO signupdto) {
 
@@ -65,6 +73,8 @@ public class LoginService {
 			if(empReturn.isPresent()) {
 				System.out.println("Optional Checked... :: " + empReturn.toString());
 				String token = jbdeJwtToken.generateJbeToken(empReturn.get());
+				jbdeToken.setJbdeToken(token);
+				jbdeTokenRepository.save(jbdeToken);
 				Map<String, Object> data = new HashMap<>();
 				data.put("accessToken", token);
 				token = jbdeJwtToken.generateJbdeRefreshToken(empReturn.get());

@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 
+import com.jbde.dto.LoginRequestDTO;
 import com.jbde.entity.Employee;
 import com.jbde.exception.JbdeAccessDeniedException;
 import io.jsonwebtoken.Claims;
@@ -40,6 +41,8 @@ public class JbdeJwtToken {
 		                .expiration(expireAt);
 		              
 		                claims.add("name",employee.getEmpName());
+		                claims.add("email", employee.getEmpEmail());
+		                claims.add("role", employee.getEmpRole());
 		                
 		        		@SuppressWarnings("unchecked")
 						String token = Jwts.builder()
@@ -74,7 +77,8 @@ public class JbdeJwtToken {
                 .expiration(rtexpireAt);
               
                 claims.add("name",employee.getEmpName());
-                
+                claims.add("email", employee.getEmpEmail());
+                claims.add("role", employee.getEmpRole());
         		@SuppressWarnings("unchecked")
 				String token = Jwts.builder()
                 		.claims((Map<String, ?>) claims)
@@ -94,7 +98,7 @@ public class JbdeJwtToken {
 		Claims claims = Jwts.parser()
 						.setSigningKey(getJbdeSigningKey()).build().parseClaimsJws(authorization).getBody();	
 		
-		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details : Emp Name::  " + claims.get("name") + "  Iss:: " + claims.getIssuer());	
+		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details : Emp Name::  " + claims.get("name") + "  Iss:: " + claims.getIssuer() + "\n CLaim Body :: " + claims.toString());	
 		return claims;
 		
 	} catch(Exception e) {
@@ -103,6 +107,15 @@ public class JbdeJwtToken {
 	}
 	
 	
+	}
+	
+	public boolean validateJbdeToken(String authorization, String email) throws Exception {
+		Claims claims = verifyJbdeJwtToken(authorization);
+		System.out.println("Token - Email :: " + claims.get("email") + "\n" + "Login Email :: " + email + "\n");
+		System.out.println("Is Email Valid :: " + ((claims.get("email").equals(email))));
+		System.out.println("Is Token Valid :: " + !(claims.getExpiration().before(new Date())));
+		 return (claims.get("email").equals(email) && !(claims.getExpiration().before(new Date())));
+		
 	}
 	
 	public String extractEmployeeName(String token) {
