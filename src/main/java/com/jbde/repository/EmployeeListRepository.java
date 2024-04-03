@@ -1,6 +1,7 @@
 package com.jbde.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,6 +13,6 @@ public interface EmployeeListRepository extends JpaRepository<Employee, Long> {
 
 	List<Employee> findByEmpName(String empName);
 
-	Employee findOneByEmpEmailIgnoreCaseAndEmpPassword(String empEmail, String empPassword);
+	Optional<Employee > findOneByEmpEmailIgnoreCaseAndEmpPassword(String empEmail, String empPassword) throws Exception;
 
 }

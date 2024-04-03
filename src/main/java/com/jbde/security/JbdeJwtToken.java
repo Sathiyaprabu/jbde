@@ -2,6 +2,7 @@ package com.jbde.security;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
@@ -29,13 +30,24 @@ public class JbdeJwtToken {
 
 	public String generateJbeToken(Employee employee) {
 		
-        		String token = Jwts.builder()
-        		.subject(employee.getID().toString())
-        		.issuer(employee.getEmpID())
-                .issuedAt(issuedAt)
-                .expiration(expireAt)
-                .signWith(getJbdeSigningKey())
-                .compact();
+				ClaimsBuilder claims = Jwts.claims()
+						.subject(employee.getID().toString())
+		        		.issuer(employee.getEmpID())
+		                .issuedAt(issuedAt)
+		                .expiration(expireAt);
+		              
+		                claims.add("name",employee.getEmpName());
+		                
+		        		String token = Jwts.builder()
+		                		.claims((Map<String, ?>) claims)
+		                        .signWith(getJbdeSigningKey())
+		                        .compact();
+		        		
+						/*
+						 * String token = Jwts.builder() .subject(employee.getID().toString())
+						 * .issuer(employee.getEmpID()) .issuedAt(issuedAt) .expiration(expireAt)
+						 * .signWith(getJbdeSigningKey()) .compact();
+						 */
                		
         		return token;
 	}
@@ -57,19 +69,18 @@ public class JbdeJwtToken {
 	//verifying the Claims
 	@SuppressWarnings("deprecation")
 	public Claims verifyJbdeJwtToken(String authorization) throws Exception {
-		System.out.println("In Verify Method...");
+		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() ");
 		
 	try {
 		
 		Claims claims = Jwts.parser()
 						.setSigningKey(getJbdeSigningKey()).build().parseClaimsJws(authorization).getBody();	
 		
-		System.out.println("In verify - Name in Claim::: " + claims.get("name"));
-		
+		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details :  " + claims.get("name") + "  Iss:: " + claims.getIssuer());	
 		return claims;
 		
 	} catch(Exception e) {
-		System.out.println("In Verify Tokenn method in catch block");
+		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : In Catch Block");
 		 throw new JbdeAccessDeniedException("Access Denied");
 	}
 	

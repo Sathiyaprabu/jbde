@@ -23,12 +23,17 @@ public class JbdeJwtInterceptor extends WebRequestHandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		System.out.println("URI :: "+ request.getRequestURI());
-		String auth = request.getHeader("authorization");
+	
+		System.out.println("JbdeJwtInterceptor :: preHandle() : URI -  "+ request.getRequestURI());
 		
-	if(!request.getRequestURI().contains("login") || request.getRequestURI().contains("signup")) {
+		String auth = request.getHeader("authorization");
+		System.out.println("JbdeJwtInterceptor :: preHandle() : Auth in Header - " + auth);
+		
+	if(!(request.getRequestURI().contains("login") || request.getRequestURI().contains("signup"))) {
 		jbdeJwtToken.verifyJbdeJwtToken(auth);
+		System.out.println("JbdeJwtInterceptor :: preHandle() : NOT LOGIN/SIGNUP Check - after verifyJbdeJwtToken() called ");
 	}
+	
 		return super.preHandle(request, response, handler);
 	}
 }

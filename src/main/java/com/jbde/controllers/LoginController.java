@@ -35,8 +35,8 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<APIResponse> login(@RequestBody LoginRequestDTO loginreqdto) {
-
+	public ResponseEntity<APIResponse> login(@RequestBody LoginRequestDTO loginreqdto) throws Exception {
+		System.out.println("In Login Controller Class & inside login() method...");
 		apiResponse = loginService.loginService(loginreqdto);
 
 		return ResponseEntity.status(apiResponse.getStatus()).body(apiResponse);
@@ -46,7 +46,7 @@ public class LoginController {
 	public ResponseEntity<APIResponse> privateTestAPI(@RequestHeader(value = "authorization", defaultValue = "" ) String auth) throws Exception{
 		
 	//	jbdeJwtToken.verifyJbdeJwtToken(auth);
-		
+		System.out.println("LoginController :: privateTestAPI() ");
 		apiResponse.setData("This is private api");
 		return ResponseEntity.status(apiResponse.getStatus()).body(apiResponse);
 		

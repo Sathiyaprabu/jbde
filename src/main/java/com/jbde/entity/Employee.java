@@ -3,6 +3,8 @@
  */
 package com.jbde.entity;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Data
+@Component
 @Table(name = "Employee")
 public class Employee {
 	
