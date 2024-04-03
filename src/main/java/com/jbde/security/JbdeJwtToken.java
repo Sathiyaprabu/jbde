@@ -94,7 +94,7 @@ public class JbdeJwtToken {
 		Claims claims = Jwts.parser()
 						.setSigningKey(getJbdeSigningKey()).build().parseClaimsJws(authorization).getBody();	
 		
-		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details :  " + claims.get("name") + "  Iss:: " + claims.getIssuer());	
+		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details : Emp Name::  " + claims.get("name") + "  Iss:: " + claims.getIssuer());	
 		return claims;
 		
 	} catch(Exception e) {
