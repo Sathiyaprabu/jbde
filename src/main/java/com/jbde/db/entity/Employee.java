@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.jbde.entity;
+package com.jbde.db.entity;
 
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,7 @@ import lombok.Setter;
 /**
  *
  */
-@Getter
-@Setter
+
 @Entity
 @Data
 @Component

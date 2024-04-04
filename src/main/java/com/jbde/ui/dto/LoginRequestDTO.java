@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.jbde.dto;
+package com.jbde.ui.dto;
 
 import org.springframework.stereotype.Component;
 

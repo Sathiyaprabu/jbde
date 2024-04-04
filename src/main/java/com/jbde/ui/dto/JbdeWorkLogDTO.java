@@ -1,4 +1,4 @@
-package com.jbde.dto;
+package com.jbde.ui.dto;
 
 import java.util.Date;
 
@@ -10,6 +10,7 @@ import lombok.Data;
 @Component
 public class JbdeWorkLogDTO {
 	
+	public String empID;
 	public String empName;
 	public Date workDate;
 	public String department;

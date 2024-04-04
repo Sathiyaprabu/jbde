@@ -1,4 +1,4 @@
-package com.jbde.dto;
+package com.jbde.ui.dto;
 
 import lombok.Getter;
 import lombok.Setter;

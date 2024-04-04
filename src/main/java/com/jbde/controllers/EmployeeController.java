@@ -6,8 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.jbde.entity.Employee;
-import com.jbde.service.EmployeeService;
+
+import com.jbde.db.entity.Employee;
+import com.jbde.service.employee.EmployeeService;
 import com.jbde.util.APIResponse;
 
 @Controller

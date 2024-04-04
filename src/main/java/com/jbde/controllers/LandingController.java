@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jbde.dto.JbdeRequestMeta;
-import com.jbde.entity.Employee;
-import com.jbde.entity.JbdeToken;
+import com.jbde.db.entity.Employee;
+import com.jbde.db.entity.JbdeToken;
 import com.jbde.repository.EmployeeListRepository;
 import com.jbde.repository.JbdeTokenRepository;
 import com.jbde.security.JbdeJwtToken;
+import com.jbde.ui.dto.JbdeRequestMeta;
 
 @Controller
 @RequestMapping("/")

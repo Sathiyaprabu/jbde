@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.jbde.entity.Employee;
+import com.jbde.db.entity.Employee;
 
 import io.jsonwebtoken.ClaimsBuilder;
 import io.jsonwebtoken.Jwts;

@@ -1,9 +1,9 @@
-package com.jbde.service;
+package com.jbde.service.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jbde.entity.Employee;
+import com.jbde.db.entity.Employee;
 import com.jbde.repository.EmployeeListRepository;
 import com.jbde.util.APIResponse;
 

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequestInterceptor;
 import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
 
-import com.jbde.dto.LoginRequestDTO;
 import com.jbde.security.JbdeJwtToken;
+import com.jbde.ui.dto.LoginRequestDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import com.jbde.config.JbdeJwtInterceptor;
-import com.jbde.dto.JbdeRequestMeta;
+import com.jbde.ui.dto.JbdeRequestMeta;
 
 @Configuration
 public class JbdeCustomWebConfig extends WebMvcConfigurationSupport {

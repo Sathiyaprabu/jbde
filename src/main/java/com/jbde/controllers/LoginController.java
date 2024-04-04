@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import com.jbde.dto.LoginRequestDTO;
-import com.jbde.dto.SignUpRequestDTO;
 import com.jbde.security.JbdeJwtToken;
-import com.jbde.service.LoginService;
+import com.jbde.service.common.LoginService;
+import com.jbde.ui.dto.LoginRequestDTO;
+import com.jbde.ui.dto.SignUpRequestDTO;
 import com.jbde.util.APIResponse;
 
 @Controller

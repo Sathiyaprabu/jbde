@@ -7,9 +7,10 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 
-import com.jbde.dto.LoginRequestDTO;
-import com.jbde.entity.Employee;
+import com.jbde.db.entity.Employee;
 import com.jbde.exception.JbdeAccessDeniedException;
+import com.jbde.ui.dto.LoginRequestDTO;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ClaimsBuilder;
 import io.jsonwebtoken.Jwts;

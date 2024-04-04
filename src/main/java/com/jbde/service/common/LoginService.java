@@ -1,4 +1,4 @@
-package com.jbde.service;
+package com.jbde.service.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,13 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jbde.dto.LoginRequestDTO;
-import com.jbde.dto.SignUpRequestDTO;
-import com.jbde.entity.Employee;
-import com.jbde.entity.JbdeToken;
+import com.jbde.db.entity.Employee;
+import com.jbde.db.entity.JbdeToken;
 import com.jbde.repository.EmployeeListRepository;
 import com.jbde.repository.JbdeTokenRepository;
 import com.jbde.security.JbdeJwtToken;
+import com.jbde.ui.dto.LoginRequestDTO;
+import com.jbde.ui.dto.SignUpRequestDTO;
 import com.jbde.util.APIResponse;
 
 @Service

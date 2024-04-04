@@ -1,6 +1,6 @@
 package com.jbde.common;
 
-import com.jbde.entity.Employee;
+import com.jbde.db.entity.Employee;
 import com.jbde.security.JbdeJwtToken;
 
 public class JbdeIAM {
