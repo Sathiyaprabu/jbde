@@ -50,6 +50,7 @@ public class LoginService {
 		empEntity.setEmpRole(signupdto.getSuempRole());
 
 		empEntity = employeeListRepository.save(empEntity);
+		
 		String token = jbdeJwtToken.generateJbeToken(empEntity);
 		Map<String, Object> data = new HashMap<>();
 		data.put("accessToken", token);
