@@ -1,6 +1,6 @@
 package com.jbde.employee;
 
-public interface JbdeEmployeeTimeLog {
+public interface JbdeWorkLog {
 
 	public void updateDailyWork();
 	public void selectWorkType();

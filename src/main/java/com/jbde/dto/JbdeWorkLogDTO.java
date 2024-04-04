@@ -1,11 +1,14 @@
-package com.jbde.entity;
+package com.jbde.dto;
 
 import java.util.Date;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
-public class JbdeDailyTimeLog {
+@Component
+public class JbdeWorkLogDTO {
 	
 	public String empName;
 	public Date workDate;
