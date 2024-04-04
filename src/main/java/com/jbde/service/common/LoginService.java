@@ -40,7 +40,7 @@ public class LoginService {
 	public APIResponse signUpService(SignUpRequestDTO signupdto) {
 
 		// validation
-		System.out.println("Inside SignUp method...");
+		System.out.println("LoginService :: signUpService() ");
 		// dtp to entity convert
 		//Employee empEntity = new Employee();
 		empEntity.setEmpEmail(signupdto.getSuempEmail());
