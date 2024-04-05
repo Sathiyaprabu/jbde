@@ -70,6 +70,13 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.12.5</version>
 		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<!--<version>3.2.4</version>-->
+		</dependency>
 
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>

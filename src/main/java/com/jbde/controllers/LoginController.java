@@ -36,7 +36,7 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<APIResponse> login(@RequestBody LoginRequestDTO loginreqdto) throws Exception {
-		System.out.println("In Login Controller Class & inside login() method...");
+		System.out.println("LoginController :: login() ");
 		apiResponse = loginService.loginService(loginreqdto);
 
 		return ResponseEntity.status(apiResponse.getStatus()).body(apiResponse);

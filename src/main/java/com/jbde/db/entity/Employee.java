@@ -26,26 +26,27 @@ import lombok.Setter;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long ID;
-	
-	@Column(name="employeeID", length = 20, nullable = false, unique = true)
 	public String empID;
 	
-	@Column(name = "employeeName", length = 40)
+	@Column(nullable = false)
 	public String empName;
 	
-	@Column(name = "empEmail", length = 50)
+	@Column(nullable = false, unique = true )
 	public String empEmail;
 	
-	@Column(name = "empPassword", length = 50)
+	@Column(nullable = false)
 	public String empPassword;
 	
-	@Column(name = "empRole", length = 50)
+	@Column(nullable = false)
 	public String empRole;
 	
-	//public int empAge;
-	//public int empExperience;
-	//public StringBuilder empDepartment;
+	@Column(nullable = false)
+	public int empAge;
+	
+	@Column(nullable = false)
+	public int empExperience;
+	
+	@Column(nullable = false)
+	public String empDepartment;
 
 }

@@ -13,14 +13,12 @@ import lombok.Data;
 @Data
 @Component
 @Entity
-@Table(name = "JbdeToken")
 public class JbdeToken {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long ID;
+	public String empID;
 	
-	@Column(name="jbdeToken", nullable = false)
+	@Column(nullable = false)
 	String jbdeToken;
 	
 }

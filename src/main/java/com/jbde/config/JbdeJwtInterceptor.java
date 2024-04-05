@@ -31,10 +31,11 @@ public class JbdeJwtInterceptor extends WebRequestHandlerInterceptorAdapter{
 		System.out.println("JbdeJwtInterceptor :: preHandle() : URI -  "+ request.getRequestURI());
 		
 		String auth = request.getHeader("authorization");
+		
 		System.out.println("JbdeJwtInterceptor :: preHandle() : Auth in Header - " + auth);
 		
 	if(!(request.getRequestURI().contains("login") || request.getRequestURI().contains("signup"))) {
-		jbdeJwtToken.verifyJbdeJwtToken(auth);
+		jbdeJwtToken.validateJbdeToken(auth);
 		
 		System.out.println("JbdeJwtInterceptor :: preHandle() : NOT LOGIN/SIGNUP Check - after verifyJbdeJwtToken() called ");
 	}

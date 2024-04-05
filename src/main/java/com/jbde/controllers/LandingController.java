@@ -1,5 +1,6 @@
 package com.jbde.controllers;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import com.jbde.repository.EmployeeListRepository;
 import com.jbde.repository.JbdeTokenRepository;
 import com.jbde.security.JbdeJwtToken;
 import com.jbde.ui.dto.JbdeRequestMeta;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/")
@@ -36,12 +39,14 @@ public class LandingController {
 	private JbdeTokenRepository jbdeTokenRepository;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/landing/{employee}")
-	public String loadIndexPage(@PathVariable("employee") String empName, Model model) throws Exception {
-		System.out.println("LandingController :: loadIndexPage() :: Emp ID: " + jbdeRequestMeta.getEmpID());
-		String email = "test_22@test.com";
-		jbdeToken = (JbdeToken) jbdeTokenRepository.findByJbdeToken(null);
-		String auth = jbdeToken.getJbdeToken();
-		jbdeJwtToken.validateJbdeToken(auth, email);
+	public String loadIndexPage(@PathVariable("employee") String empName, Model model, HttpServletRequest req ) throws Exception {
+		System.out.println("LandingController :: loadIndexPage() : \nToken In Header: " + req.getHeader("authorization"));
+		//String email = "test_22@test.com";
+		//jbdeToken = (JbdeToken) jbdeTokenRepository.findByJbdeToken(null);
+		//String auth = jbdeToken.getJbdeToken();
+		
+		String auth = req.getHeader("authorization");
+		jbdeJwtToken.validateJbdeToken(auth);
 		List<Employee> employeeList = empllistrepo.findByEmpName(empName);
 		model.addAttribute("employees", employeeList);
 

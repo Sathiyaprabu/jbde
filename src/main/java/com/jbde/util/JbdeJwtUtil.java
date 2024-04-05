@@ -20,7 +20,7 @@ public class JbdeJwtUtil {
 		
 		//claims
 		ClaimsBuilder jbdeclaims = Jwts.claims()
-				.setIssuer(empentity.getID().toString())
+				.setIssuer(empentity.getEmpID().toString())
 				.setIssuedAt(issuesAt);
 				
 		return "";

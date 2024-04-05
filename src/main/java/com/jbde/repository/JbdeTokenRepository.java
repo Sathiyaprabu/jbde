@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.jbde.db.entity.JbdeToken;
 
-public interface JbdeTokenRepository extends JpaRepository<JbdeToken, Long> {
+public interface JbdeTokenRepository extends JpaRepository<JbdeToken, String> {
 
 	List<JbdeToken> findByJbdeToken(String jbdeToken);
 	

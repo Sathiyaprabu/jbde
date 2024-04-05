@@ -36,7 +36,7 @@ public class JbdeJwtToken {
 	public String generateJbeToken(Employee employee) {
 		
 				ClaimsBuilder claims = Jwts.claims()
-						.subject(employee.getID().toString())
+						.subject(employee.getEmpID())
 		        		.issuer(employee.getEmpID())
 		                .issuedAt(issuedAt)
 		                .expiration(expireAt);
@@ -72,7 +72,7 @@ public class JbdeJwtToken {
 		 */
 		
 		ClaimsBuilder claims = Jwts.claims()
-				.subject(employee.getID().toString())
+				.subject(employee.getEmpID())
         		.issuer(employee.getEmpID())
                 .issuedAt(rtissuedAt)
                 .expiration(rtexpireAt);
@@ -99,7 +99,7 @@ public class JbdeJwtToken {
 		Claims claims = Jwts.parser()
 						.setSigningKey(getJbdeSigningKey()).build().parseClaimsJws(authorization).getBody();	
 		
-		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details : Emp Name::  " + claims.get("name") + "  Iss:: " + claims.getIssuer() + "\n CLaim Body :: " + claims.toString());	
+		System.out.println("JbdeJwtToken :: verifyJbdeJwtToken() : Claims Details : Emp Name::  " + claims.get("name") + "  Iss:: " + claims.getIssuer() + "\nClaim Body :: " + claims.toString());	
 		return claims;
 		
 	} catch(Exception e) {
@@ -110,7 +110,7 @@ public class JbdeJwtToken {
 	
 	}
 	
-	public boolean validateJbdeToken(String authorization, String email) throws Exception {
+	public boolean validateJbdeTokeninHeader(String authorization, String email) throws Exception {
 		Claims claims = verifyJbdeJwtToken(authorization);
 		System.out.println("Token - Email :: " + claims.get("email") + "\n" + "Login Email :: " + email + "\n");
 		System.out.println("Is Email Valid :: " + ((claims.get("email").equals(email))));
@@ -118,6 +118,23 @@ public class JbdeJwtToken {
 		 return (claims.get("email").equals(email) && !(claims.getExpiration().before(new Date())));
 		
 	}
+	
+	public boolean validateJbdeToken(String token) throws Exception {
+		//verify claim expiry
+		Claims claims = extractAllClaims(token);
+		System.out.println("JbdeJwtToken :: Generated Claims: " + claims + "\nClaim Expiry : " + claims.getExpiration() + "\nClaims getNotBefore : " + claims.getNotBefore() + "\nClaims Expiry & Before : " + claims.getExpiration().before(new Date(System.currentTimeMillis())));
+		
+		//check the token expiry is after the current system date & time
+		if(claims.getExpiration().after(new Date(System.currentTimeMillis()))) {
+			System.out.println("JbdeJwtToken :: validateJbdeToken() : Token is valid ");
+			return true;
+		}
+		
+		System.out.println("JbdeJwtToken :: validateJbdeToken() : Token is EXPIRED ");
+		return false;
+		
+	}
+	
 	
 	public String extractEmployeeName(String token) {
 
@@ -132,7 +149,7 @@ public class JbdeJwtToken {
 
 	}
 
-	private Claims extractAllClaims(String token) {
+	public Claims extractAllClaims(String token) {
 
 		return Jwts.parser().setSigningKey(getJbdeSigningKey()).build().parseClaimsJws(token).getBody();
 	}
