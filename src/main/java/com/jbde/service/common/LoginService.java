@@ -4,19 +4,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.ui.Model;
 import com.jbde.db.entity.Employee;
 import com.jbde.db.entity.JbdeToken;
 import com.jbde.repository.EmployeeListRepository;
 import com.jbde.repository.JbdeTokenRepository;
 import com.jbde.security.JbdeJwtToken;
+import com.jbde.service.employee.EmployeeService;
 import com.jbde.ui.dto.LoginRequestDTO;
 import com.jbde.ui.dto.SignUpRequestDTO;
 import com.jbde.util.APIResponse;
-
 import io.jsonwebtoken.Claims;
 
 @Service
@@ -39,6 +38,8 @@ public class LoginService {
 
 	@Autowired
 	JbdeToken jbdeToken;
+	
+	
 
 	public APIResponse signUpService(SignUpRequestDTO signupdto) {
 
@@ -68,9 +69,7 @@ public class LoginService {
 	}
 
 	public APIResponse loginService(LoginRequestDTO logindto) throws Exception {
-
-		// validation
-
+		
 		// verify login details
 		System.out.println("LoginService :: loginService() ");
 		System.out.println("LoginService :: loginService() : User Details: " + logindto.getEmpLoginEmail()
@@ -96,7 +95,7 @@ public class LoginService {
 			data.put("accessToken", token);
 			token = jbdeJwtToken.generateJbdeRefreshToken(empReturn.get());
 			data.put("refreshToken", token);
-
+			apiResponse.setData(data);
 			// verify claim expiry
 			Claims claims = jbdeJwtToken.extractAllClaims(token);
 			System.out.println(
@@ -105,24 +104,17 @@ public class LoginService {
 							+ claims.getExpiration().before(new Date(System.currentTimeMillis())));
 
 			// check the token expiry is after the current system date & time
-			if (jbdeJwtToken.validateJbdeToken(token)) {
-				System.out.println("LoginService :: loginService() : Token is valid ");
-			} else {
-
-				System.out.println("LoginService :: loginService() : Token is EXPIRED ");
-			}
-
-			apiResponse.setData(data);
+			 
 
 		} else {
 
 			apiResponse.setData("User Login Failed");
 			// apiResponse.setError(401);
 			System.out.println("User Login Failed ... ");
-			return apiResponse;
+			//return apiResponse;
 		}
 
-		System.out.println("ID from Query::  " + empReturn.get().getEmpID());
+		
 
 		// response
 		/*

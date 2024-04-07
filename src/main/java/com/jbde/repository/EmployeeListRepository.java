@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.jbde.db.entity.Employee;
 
-public interface EmployeeListRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeListRepository extends JpaRepository<Employee, String> {
 
 	List<Employee> findByEmpID(String emplID);
+	
+	//Employee findByEmployee(String emplID);
 
 	List<Employee> findByEmpName(String empName);
 
